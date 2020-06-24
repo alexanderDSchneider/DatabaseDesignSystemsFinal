@@ -1,0 +1,89 @@
+admin                     //comments on schema
+{
+  "_id": "<string>",      //identifies unique admin account
+  "person_id": "<ObjectI>"//person id from person collection
+  "name": [{}
+    "k": "<int>",         // int values 0 is first name 1 is last
+    "v": "<string>"}],
+  "contact_info": [{
+    "k": "<int>",         //int values 0 is email 1 is phone 3 is address
+    "v": "<string>"
+  }],
+  "dept": "<int>",        //keeps track of what department they manage
+  "salt": "<string>",
+  "hash": "<string>",
+  "supervise": [{
+    "k": "<int>",         //array of the officer ids of the officers in their department
+    "v": "<string>"
+  }]
+  "tickets_written": [{
+    "k": "<int>",         //array of the ticketids of the tickets they have written
+    "v": "<string>"
+  }]
+}
+
+officer
+{
+  "_id": "<string>",      //identifies unique officer account
+  "person_id": "<ObjectI>"//person id from person collection
+  "name": [{}
+    "k": "<int>",         // int values 0 is first name 1 is last
+    "v": "<string>"}],
+  "contact_info": [{
+    "k": "<int>",         //int values 0 is email 1 is phone 3 is address
+    "v": "<string>"
+  }],
+  "dept": "<int>",        //keeps track of what department they are in
+  "salt": "<string>",
+  "hash": "<string>",
+  "tickets_written": [{
+    "k": "<int>",         //array of the ticketids of the tickets they have written
+    "v": "<string>"
+  }]
+}
+
+person
+{
+  "person_id": "<ObjectI>"/unique object id
+  "name": [{}
+    "k": "<int>",         // int values 0 is first name 1 is last
+    "v": "<string>"}],
+  "contact_info": [{
+    "k": "<int>",         //int values 0 is email 1 is phone 3 is address
+    "v": "<string>"
+  }],
+  "vehicles": [{
+    "k": "<int>",         //int
+    "v": "<string>"       //plate numbers are strings
+  }],
+  "unpaid_tickets": [{
+    "k": "<int>",         //int
+    "v": "<string>"       //array of unpaid ticket ids
+  }],
+  "past_tickets": [{
+    "k": "<int>",         //int
+    "v": "<string>"       //array of past tickets, either current or waived off
+  }]
+}
+
+
+ticket
+{
+  "_id": "<string>",        //based off of officers id and number of tickets assigned by officer
+  "officer_id": "<string>", //officers id
+  "plate": "<string>",      //license plate of car
+  "location": "<string>",
+  "reason": "<string>",
+  "date": "<string>",
+  "paid": "<bool>",
+  "contested": "<bool>", //if ticket is contested as invalid by someone
+  "contest_reason": "<string>", //this is not in a ticket normally, it is only added if it is contested
+  "withdrawn": "<bool>"   //this is not in ticket normally either, added after ticket is reviewed to see if it is a valid reason to give a ticket
+}
+
+vehicles
+{
+  "_id": "<string>",        //license plate is a string
+  "make": "<string>",
+  "model": "<string>",      
+}
